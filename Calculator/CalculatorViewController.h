@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CalculatorViewController : UIViewController
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *display;
+
+@property (weak, nonatomic) IBOutlet UILabel *stackStrip;
+
+@property (weak, nonatomic) IBOutlet UILabel *stackContent;
 
 @end
