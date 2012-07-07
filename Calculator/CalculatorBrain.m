@@ -66,15 +66,15 @@
 }
 
 - (NSString *)listOperandStack{
-    NSNumber *obj;
-    NSString *result =@"";
-    NSEnumerator *stackEnumerator = [self.operandStack objectEnumerator];
-    while (obj = [stackEnumerator nextObject]){
-        NSString *n = [NSString stringWithFormat:@"%g", obj.doubleValue];
-        result = [[result stringByAppendingString:n] stringByAppendingString:@" "];
-    }
-    
-    return result;
+    //NSNumber *obj;
+    //NSString *result =@"";
+    //NSEnumerator *stackEnumerator = [self.operandStack objectEnumerator];
+    //while (obj = [stackEnumerator nextObject]){
+    //    NSString *n = [NSString stringWithFormat:@"%g", obj.doubleValue];
+    //    result = [[result stringByAppendingString:n] stringByAppendingString:@" "];
+    //}
+    NSString *otherResult=[self.operandStack componentsJoinedByString:@","];
+    return otherResult;
 }
 
 @end
