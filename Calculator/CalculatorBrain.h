@@ -14,5 +14,10 @@
 - (void) clear;
 - (NSString *)listOperandStack;
 
+@property (readonly) id program; 
+
++ (double) runProgram:(id)program;
++ (NSString *)descriptionOfProgram:(id)program; 
+
 
 @end
