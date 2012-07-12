@@ -13,6 +13,7 @@
 - (double)performOperation:(NSString *)operation; 
 - (void) clear;
 - (NSString *)listOperandStack;
+- (void) popElement;
 
 @property (readonly) id program; 
 

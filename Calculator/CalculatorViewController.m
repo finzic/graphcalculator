@@ -116,7 +116,10 @@
             self.display.text=newDisplay;
         }
     } else{
-        // do nothing
+        // remove an element from the stack
+        [self.brain popElement];
+        self.stackStrip.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+        self.stackContent.text = self.brain.listOperandStack;
     }
 }
 /*

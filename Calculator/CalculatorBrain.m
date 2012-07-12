@@ -119,10 +119,16 @@ static NSSet *_myFuncSet = nil;
 
 + (NSString *)descriptionOfProgram:(id)program{
     NSMutableArray *stack;
+    NSMutableArray *results= [[NSMutableArray alloc] init];
     if([program isKindOfClass:[NSArray class]]){
         stack = [program mutableCopy];
     }
-    return [CalculatorBrain descriptionOfTopOfStack:stack atLevel:0];
+    
+    while (stack.count > 0){
+        [results addObject:[CalculatorBrain descriptionOfTopOfStack:stack atLevel:0]];
+    }
+    
+    return [results componentsJoinedByString:@", "];
 
 //    return @"Implement this in Assignment #2";
 }
@@ -236,6 +242,12 @@ static NSSet *_myFuncSet = nil;
 
 + (NSSet *)variablesUsedInProgram:(id)program{
     // returns NSSet of NSString's...
+}
+
+- (void)popElement{
+    NSMutableArray *s = self.programStack;
+    id topOfStack = [s lastObject];
+    if(topOfStack) [s removeLastObject];
 }
 
 
