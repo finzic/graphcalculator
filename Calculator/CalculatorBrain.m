@@ -111,14 +111,7 @@ static NSSet *_myFuncSet = nil;
             NSLog(@"DoubleOperand Lo Prio Operation: desc = %@, level = %d", desc, paren );
         } 
         else {
-            NSArray *dividendArray = [CalculatorBrain descriptionOfTopOfStack:stk] ;
-            NSString *dividend=[dividendArray objectAtIndex:0 ];
-            // paren = [dividendArray objectAtIndex:1] 
-            if ([[dividendArray objectAtIndex:1] boolValue] ){
-                dividendFormat = @"(%@)";
-            } else {
-                dividendFormat = @"%@";
-            }
+            
             NSArray *divisorArray = [CalculatorBrain descriptionOfTopOfStack:stk];
             NSString *divisor=[divisorArray objectAtIndex:0];
             // paren = [divisorArray objectAtIndex:1]
@@ -127,7 +120,16 @@ static NSSet *_myFuncSet = nil;
             } else {
                 divisorFormat = @"%@";
             }
-            format = [[[NSArray alloc] initWithObjects:dividendFormat, divisorFormat, nil] componentsJoinedByString:@"%@"];
+
+            NSArray *dividendArray = [CalculatorBrain descriptionOfTopOfStack:stk] ;
+            NSString *dividend=[dividendArray objectAtIndex:0 ];
+            // paren = [dividendArray objectAtIndex:1] 
+            if ([[dividendArray objectAtIndex:1] boolValue] ){
+                dividendFormat = @"(%@)";
+            } else {
+                dividendFormat = @"%@";
+            }
+                        format = [[[NSArray alloc] initWithObjects:dividendFormat, divisorFormat, nil] componentsJoinedByString:@"%@"];
             desc = [[NSString alloc] initWithFormat:format, dividend, op, divisor];
             paren = NO;
             NSLog(@"Double Operand Hi Prio Operation: desc = %@, level = %d", desc, paren );
