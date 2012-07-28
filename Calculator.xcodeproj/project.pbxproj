@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		384A560215B09BAB005B71EE /* StringBool.m in Sources */ = {isa = PBXBuildFile; fileRef = 384A560115B09BAB005B71EE /* StringBool.m */; };
 		38D1F2D315999348009185B9 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D1F2D215999348009185B9 /* CalculatorBrain.m */; };
 		38F27C991593C3A200F5C800 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F27C981593C3A200F5C800 /* UIKit.framework */; };
 		38F27C9B1593C3A200F5C800 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F27C9A1593C3A200F5C800 /* Foundation.framework */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		384A560015B09BAB005B71EE /* StringBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringBool.h; path = Calculator/StringBool.h; sourceTree = "<group>"; };
+		384A560115B09BAB005B71EE /* StringBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringBool.m; path = Calculator/StringBool.m; sourceTree = "<group>"; };
 		38D1F2D115999348009185B9 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		38D1F2D215999348009185B9 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
 		38F27C941593C3A100F5C800 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +56,8 @@
 		38F27C891593C3A100F5C800 = {
 			isa = PBXGroup;
 			children = (
+				384A560015B09BAB005B71EE /* StringBool.h */,
+				384A560115B09BAB005B71EE /* StringBool.m */,
 				38F27C9E1593C3A200F5C800 /* Calculator */,
 				38F27C971593C3A200F5C800 /* Frameworks */,
 				38F27C951593C3A100F5C800 /* Products */,
@@ -170,6 +175,7 @@
 				38F27CA91593C3A200F5C800 /* CalculatorAppDelegate.m in Sources */,
 				38F27CAF1593C3A200F5C800 /* CalculatorViewController.m in Sources */,
 				38D1F2D315999348009185B9 /* CalculatorBrain.m in Sources */,
+				384A560215B09BAB005B71EE /* StringBool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
