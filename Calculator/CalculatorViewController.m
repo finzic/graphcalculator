@@ -7,6 +7,7 @@
 //
 
 #import "CalculatorViewController.h"
+#import "GraphViewController.h"
 #import "CalculatorBrain.h"
 
 @interface CalculatorViewController ()
@@ -36,7 +37,7 @@
 // lazy instantiation also for vars.
 - (NSDictionary *) vars{
     if (!_vars){
-        _vars = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:3.0],@"x", [NSNumber numberWithDouble:4.0] , @"y", nil];
+        _vars = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:0.0],@"y",  nil];
     }
     return _vars;
 }
@@ -132,14 +133,19 @@ if(self.userIsInTheMiddleOfEnteringANumber){
 }
 */
 
-- (IBAction)heyAction:(id)sender {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Ciao Emiliano"
-                                                      message:@"Higgs boson to come"
-                                                     delegate:nil
-                                            cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil];
-    
-    [message show];
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    id dvc =segue.destinationViewController;
+    if ([dvc isKindOfClass:[GraphViewController class]]) {
+        [(GraphViewController *)dvc setProgram:[self.brain.program copy]];
+        
+    }
+}
+
+- (IBAction)graphPressed:(id)sender {
+    // get the detail view controller
+    GraphViewController *gvc = [self.splitViewController.viewControllers objectAtIndex:1];
+    [gvc setProgram:[self.brain.program copy]];
+     
 }
 
 
@@ -147,5 +153,17 @@ if(self.userIsInTheMiddleOfEnteringANumber){
     [self setStackStrip:nil];
     [self setStackContent:nil];
     [super viewDidUnload];
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
 }
 @end

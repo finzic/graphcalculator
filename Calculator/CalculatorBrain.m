@@ -96,19 +96,19 @@ static NSSet *_myFuncSet = nil;
             desc = top; 
         }
         paren = NO;
-        NSLog(@" Not an Operation :desc = %@, level = %d", desc, paren );
+        //NSLog(@" Not an Operation :desc = %@, level = %d", desc, paren );
     } 
     else {
         NSString *op = top;
         if([CalculatorBrain isSingleOperandOperation:op]){
             desc = [[NSString alloc] initWithFormat:@"%@(%@)", op, [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0]];
             paren = NO;
-            NSLog(@"Single Operand Operation: desc = %@, level = %d", desc, paren);
+            //NSLog(@"Single Operand Operation: desc = %@, level = %d", desc, paren);
         } else if ([CalculatorBrain isDoubleOperandLoPrioOperation:op]){
             NSString *subt= [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0];
             desc = [[NSString alloc] initWithFormat:@"%@%@%@", [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0], op, subt];
             paren = YES;
-            NSLog(@"DoubleOperand Lo Prio Operation: desc = %@, level = %d", desc, paren );
+            //NSLog(@"DoubleOperand Lo Prio Operation: desc = %@, level = %d", desc, paren );
         } 
         else {
             
@@ -132,7 +132,7 @@ static NSSet *_myFuncSet = nil;
                         format = [[[NSArray alloc] initWithObjects:dividendFormat, divisorFormat, nil] componentsJoinedByString:@"%@"];
             desc = [[NSString alloc] initWithFormat:format, dividend, op, divisor];
             paren = NO;
-            NSLog(@"Double Operand Hi Prio Operation: desc = %@, level = %d", desc, paren );
+            //NSLog(@"Double Operand Hi Prio Operation: desc = %@, level = %d", desc, paren );
         } 
     }
     
@@ -239,7 +239,7 @@ static NSSet *_myFuncSet = nil;
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]){
         stack = [program mutableCopy];
-        NSLog(@"Stack before substitution:%@", [stack componentsJoinedByString:@","]);
+        //NSLog(@"Stack before substitution:%@", [stack componentsJoinedByString:@","]);
         // now we need to process the stack and substitute variables with values.
         for (NSUInteger i=0; i<stack.count; i++){
             id key = [stack objectAtIndex:i];
@@ -258,7 +258,7 @@ static NSSet *_myFuncSet = nil;
 
         }
         // now I have a NSMutableArray that has been replaced with values.
-        NSLog(@"Stack after substitution:%@", [stack componentsJoinedByString:@","]);
+        //NSLog(@"Stack after substitution:%@", [stack componentsJoinedByString:@","]);
         result = [self popOperandOffStack:stack];
     }
 
