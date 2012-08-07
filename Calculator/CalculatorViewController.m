@@ -164,6 +164,6 @@ if(self.userIsInTheMiddleOfEnteringANumber){
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.splitViewController.delegate = self;
+    //self.splitViewController.delegate = self;
 }
 @end

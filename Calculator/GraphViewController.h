@@ -13,6 +13,8 @@
 @interface GraphViewController : UIViewController <SplitViewBarButtonItemPresenter, UISplitViewControllerDelegate> 
 @property (weak, nonatomic) IBOutlet GraphView *graphView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UILabel *functionLabel;
+
 
 @property (nonatomic) CGFloat scale; 
 @property (nonatomic) CGPoint origin;

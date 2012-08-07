@@ -23,6 +23,8 @@
 @synthesize program = _program;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 @synthesize toolbar = _toolbar;
+@synthesize functionLabel = _functionLabel;
+
 
 #define DEFAULT_SCALE 25
 - (CGFloat)scale
@@ -45,6 +47,7 @@
 -(void)setProgram:(id)program
 {
     _program = program;
+    self.functionLabel.text = [CalculatorBrain descriptionOfProgram:program];
     [self.graphView setNeedsDisplay];
 }
 
@@ -151,33 +154,18 @@ return YES;
     [self setOrigin:o];
 }
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.splitViewController.delegate = self;
+}
 - (void)viewDidUnload {
     [self setGraphView:nil];
+    [self setFunctionLabel:nil];
     [super viewDidUnload];
 }
 
--(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
-{
-    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation) : NO;
-}
-
--(void)splitViewController:(UISplitViewController *)svc 
-    willHideViewController:(UIViewController *)aViewController
-         withBarButtonItem:(UIBarButtonItem *)barButtonItem 
-      forPopoverController:(UIPopoverController *)pc
-{
-    barButtonItem.title = self.title;
-    // tell the detailview to put the button up there.
-    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
-    
-}
-
--(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController 
- invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    //tell the detail view to take the button away.
-    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
-}
+#pragma Mark - splitViewBarButtonItemPresenter
 
 - (id <SplitViewBarButtonItemPresenter>) splitViewBarButtonItemPresenter
 {
@@ -189,6 +177,36 @@ return YES;
     return detailVC;
     
 }
+
+
+#pragma Mark - split view controller methods
+
+-(BOOL)splitViewController:(UISplitViewController *)svc 
+  shouldHideViewController:(UIViewController *)vc 
+             inOrientation:(UIInterfaceOrientation)orientation
+{
+    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation) : NO;
+}
+
+-(void)splitViewController:(UISplitViewController *)svc 
+    willHideViewController:(UIViewController *)aViewController
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem 
+      forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"Open Calculator";
+    // tell the detailview to put the button up there.
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
+    
+}
+
+-(void)splitViewController:(UISplitViewController *)svc 
+    willShowViewController:(UIViewController *)aViewController 
+ invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    //tell the detail view to take the button away.
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
+}
+
 
 -(void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem{
     if(_splitViewBarButtonItem != splitViewBarButtonItem){
