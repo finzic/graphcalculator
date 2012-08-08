@@ -17,7 +17,7 @@
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    self.splitViewController.delegate = self;
+    
 }
 
 -(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation

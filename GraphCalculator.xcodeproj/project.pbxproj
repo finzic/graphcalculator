@@ -294,11 +294,13 @@
 		38F27CB41593C3A200F5C800 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FINANTIX SPA";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/GraphCalculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/GraphCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = GraphCalculator;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79E8CB48-926C-475E-81CA-B1714376B5E4";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
