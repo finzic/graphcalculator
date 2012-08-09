@@ -128,7 +128,7 @@
         //[xvalues addObject:[NSNumber numberWithFloat:x]];
         
         // now need to find the value of 'Y' in screen 'pixel'.
-        CGFloat Y = self.origin.y - y * self.scale; //* self.graphView.contentScaleFactor;
+        CGFloat Y = self.origin.y - y * self.scale * self.graphView.contentScaleFactor;
         [Yvalues addObject:[NSNumber numberWithFloat:Y]];
         
     }

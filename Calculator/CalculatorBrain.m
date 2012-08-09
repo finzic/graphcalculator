@@ -273,6 +273,7 @@ static NSSet *_myFuncSet = nil;
 
 + (NSSet *)variablesUsedInProgram:(id)program{
     // returns NSSet of NSString's...
+    return nil;
 }
 
 - (void)popElement{
