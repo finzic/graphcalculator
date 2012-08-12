@@ -93,7 +93,7 @@
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
-    //double result = [self.brain performOperation:operation];
+    //double result = [self.brain performOperation:operation];ß
     [self.brain addOperation:operation];
     // LFC
     double result = [CalculatorBrain runProgram:self.brain.program usingVariables:self.vars];
@@ -122,6 +122,7 @@
         [self.brain popElement];
         self.stackStrip.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
         self.stackContent.text = self.brain.listOperandStack;
+        self.display.text = [NSString stringWithFormat:@"%g", [CalculatorBrain runProgram:self.brain.program usingVariables:self.vars]];
     }
 }
 /*

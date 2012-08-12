@@ -85,6 +85,7 @@ static NSSet *_myFuncSet = nil;
     // At the end of the method,  a NS Array will be created with NSString *desc and BOOL paren.
     // if there's a low prio op, paren is set to YES and the returning level will add a parenthesisation
     NSString *desc, *dividendFormat, *divisorFormat, *format;
+    NSArray *callResult; 
     BOOL paren = NO;
     id top = [stk lastObject];
     if(top) [stk removeLastObject]; // pop
@@ -105,31 +106,53 @@ static NSSet *_myFuncSet = nil;
             paren = NO;
             //NSLog(@"Single Operand Operation: desc = %@, level = %d", desc, paren);
         } else if ([CalculatorBrain isDoubleOperandLoPrioOperation:op]){
-            NSString *subt= [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0];
-            desc = [[NSString alloc] initWithFormat:@"%@%@%@", [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0], op, subt];
-            paren = YES;
+            NSString *subt1, *subt2;
+            callResult = [CalculatorBrain descriptionOfTopOfStack:stk];
+            if(callResult.count > 0){
+                subt2= [callResult objectAtIndex:0];
+            }
+            
+            callResult = [CalculatorBrain descriptionOfTopOfStack:stk];
+            if(callResult.count > 0){
+                subt1= [callResult objectAtIndex:0];
+            }
+            
+            //NSString *subt2= [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0];
+            //NSString *subt1= [[CalculatorBrain descriptionOfTopOfStack:stk] objectAtIndex:0];
+            if (subt1 && subt2) {
+                desc = [[NSString alloc] initWithFormat:@"%@%@%@", subt1, op, subt2];
+                paren = YES;
+            } else {
+                desc = @"";
+                paren = NO;
+            }
             //NSLog(@"DoubleOperand Lo Prio Operation: desc = %@, level = %d", desc, paren );
         } 
         else {
-            
+            NSString *dividend, *divisor;
             NSArray *divisorArray = [CalculatorBrain descriptionOfTopOfStack:stk];
-            NSString *divisor=[divisorArray objectAtIndex:0];
-            // paren = [divisorArray objectAtIndex:1]
-            if ( [[divisorArray objectAtIndex:1] boolValue] ){
-                divisorFormat = @"(%@)";
-            } else {
-                divisorFormat = @"%@";
+            if(divisorArray.count > 0){
+                divisor=[divisorArray objectAtIndex:0];
+                // paren = [divisorArray objectAtIndex:1]
+                if ( [[divisorArray objectAtIndex:1] boolValue] ){
+                    divisorFormat = @"(%@)";
+                } else {
+                    divisorFormat = @"%@";
+                }
             }
-
+            
             NSArray *dividendArray = [CalculatorBrain descriptionOfTopOfStack:stk] ;
-            NSString *dividend=[dividendArray objectAtIndex:0 ];
-            // paren = [dividendArray objectAtIndex:1] 
-            if ([[dividendArray objectAtIndex:1] boolValue] ){
-                dividendFormat = @"(%@)";
-            } else {
-                dividendFormat = @"%@";
+            if(dividendArray.count > 0){
+                dividend=[dividendArray objectAtIndex:0 ];
+                // paren = [dividendArray objectAtIndex:1] 
+                if ([[dividendArray objectAtIndex:1] boolValue] ){
+                    dividendFormat = @"(%@)";
+                } else {
+                    dividendFormat = @"%@";
+                }
+
             }
-                        format = [[[NSArray alloc] initWithObjects:dividendFormat, divisorFormat, nil] componentsJoinedByString:@"%@"];
+            format = [[[NSArray alloc] initWithObjects:dividendFormat, divisorFormat, nil] componentsJoinedByString:@"%@"];
             desc = [[NSString alloc] initWithFormat:format, dividend, op, divisor];
             paren = NO;
             //NSLog(@"Double Operand Hi Prio Operation: desc = %@, level = %d", desc, paren );
@@ -153,8 +176,10 @@ static NSSet *_myFuncSet = nil;
         
         //[results addObject:[CalculatorBrain descriptionOfTopOfStack:stack needParen:[NSNumber numberWithInt:0]]];
         NSArray *d = [CalculatorBrain descriptionOfTopOfStack:stack];
-    
-        [results addObject:[d objectAtIndex:0]];
+        
+        if(d.count > 0){
+            [results addObject:[d objectAtIndex:0]];
+        } 
         
         
     }
@@ -275,17 +300,19 @@ static NSSet *_myFuncSet = nil;
         [CalculatorBrain popOperandOffStack:self.programStack];
     }
 }
+- (void)popElement
+{
+    NSMutableArray *s = self.programStack;
+    id topOfStack = [s lastObject];
+    if(topOfStack) [s removeLastObject];
+}
 
 + (NSSet *)variablesUsedInProgram:(id)program{
     // returns NSSet of NSString's...
     return nil;
 }
 
-- (void)popElement{
-    NSMutableArray *s = self.programStack;
-    id topOfStack = [s lastObject];
-    if(topOfStack) [s removeLastObject];
-}
+
 
 
 @end

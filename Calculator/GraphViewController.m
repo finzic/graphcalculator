@@ -114,6 +114,8 @@
     oy = [NSNumber numberWithFloat:self.origin.y];
     scale = [NSNumber numberWithFloat:self.scale];
     
+    NSMutableArray *myProgram = [[NSMutableArray alloc] initWithArray:self.program];
+    
     NSMutableArray *Yvalues = [[NSMutableArray alloc] init];
     /* for x = min to max 
      creare un dictionary con <valore x>, "x"
