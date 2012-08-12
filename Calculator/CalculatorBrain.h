@@ -14,6 +14,7 @@
 - (void) clear;
 - (NSString *)listOperandStack;
 - (void) popElement;
+- (void) addOperation:(NSString *)operation;
 
 @property (readonly) id program; 
 

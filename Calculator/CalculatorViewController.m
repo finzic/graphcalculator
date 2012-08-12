@@ -93,9 +93,10 @@
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
-    double result = [self.brain performOperation:operation];
+    //double result = [self.brain performOperation:operation];
+    [self.brain addOperation:operation];
     // LFC
-    result = [CalculatorBrain runProgram:self.brain.program usingVariables:self.vars];
+    double result = [CalculatorBrain runProgram:self.brain.program usingVariables:self.vars];
     self.display.text = [NSString stringWithFormat:@"%g", result];
     //self.stackStrip.text = [[self.stackStrip.text stringByAppendingString:@" "] stringByAppendingString:operation];
     self.stackStrip.text = [CalculatorBrain descriptionOfProgram:self.brain.program];

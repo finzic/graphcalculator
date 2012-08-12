@@ -165,6 +165,11 @@ static NSSet *_myFuncSet = nil;
 }
 
 
+-(void)addOperation:(NSString *)operation
+{
+    [self.programStack addObject:operation];
+}
+
 - (double)performOperation:(NSString *)operation{
     [self.programStack addObject:operation];
 //    return [CalculatorBrain runProgram:self.program usingVariables:self.vars];
