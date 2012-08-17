@@ -19,7 +19,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-1129" y="-2043"/>
+            <point key="canvasLocation" x="-2285" y="-1807"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="eBE-bf-OYY">
@@ -33,7 +33,7 @@
                     </connections>
                 </splitViewController>
             </objects>
-            <point key="canvasLocation" x="-2191" y="-1582"/>
+            <point key="canvasLocation" x="-3347" y="-1346"/>
         </scene>
         <!--Graph View Controller-->
         <scene sceneID="Slb-mJ-m8L">
@@ -47,7 +47,16 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="VGs-Rv-Gvl">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kPR-yW-EED"/>
+                                    <barButtonItem title="Favorites" id="fic-BK-d6N">
+                                        <connections>
+                                            <segue destination="QKZ-CH-Kgz" kind="popover" identifier="Show Favorite Graphs" popoverAnchorBarButtonItem="fic-BK-d6N" id="BLg-Ks-hNa">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your Function Here" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="iV2-fA-Hnt">
                                 <rect key="frame" x="218" y="938" width="530" height="46"/>
@@ -56,6 +65,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h8v-VL-Dzl">
+                                <rect key="frame" x="20" y="938" width="190" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Add To Favourites">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addToFavorites:" destination="kuT-T0-51F" eventType="touchUpInside" id="4Nz-Rg-eAc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -66,7 +90,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-1282" y="-1066"/>
+            <point key="canvasLocation" x="-2438" y="-830"/>
         </scene>
         <!--Calculator View Controller - Calculator-->
         <scene sceneID="gUS-8R-ERv">
@@ -488,10 +512,52 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-682" y="-2051"/>
+            <point key="canvasLocation" x="-1838" y="-1815"/>
+        </scene>
+        <!--Calculator Table View Controller-->
+        <scene sceneID="qAR-tm-YNs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ql-z0-nEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="QKZ-CH-Kgz" customClass="CalculatorTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="is2-S3-yFC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Calculator Program Description" textLabel="joh-Tv-Gko" style="IBUITableViewCellStyleDefault" id="IFv-9d-nHZ">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="joh-Tv-Gko">
+                                            <rect key="frame" x="10" y="0.0" width="748" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QKZ-CH-Kgz" id="dPj-f8-wBX"/>
+                            <outlet property="delegate" destination="QKZ-CH-Kgz" id="u9e-zf-j40"/>
+                        </connections>
+                    </tableView>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-1113" y="-1212"/>
         </scene>
     </scenes>
     <classes>
+        <class className="CalculatorTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorTableViewController.h"/>
+        </class>
         <class className="CalculatorViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
             <relationships>

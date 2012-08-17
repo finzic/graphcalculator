@@ -9,9 +9,9 @@
 #import "GraphViewController.h"
 #import "CalculatorBrain.h"
 #import "GraphView.h"
+#import "CalculatorTableViewController.H"
 
-
-@interface GraphViewController () <GraphDataSource>
+@interface GraphViewController () <GraphDataSource, CalculatorTableViewControllerDelegate> 
 
 @end
 
@@ -25,6 +25,32 @@
 @synthesize toolbar = _toolbar;
 @synthesize functionLabel = _functionLabel;
 
+#define FAVORITE_KEY @"GraphViewController.Favorites"
+
+- (IBAction)addToFavorites:(id)sender {
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITE_KEY] mutableCopy];
+    if (!favorites) favorites = [NSMutableArray array];
+    [favorites addObject:self.program];
+    [defaults setObject:favorites forKey:FAVORITE_KEY];
+    [defaults synchronize];
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"Show Favorite Graphs"]) {
+        NSArray *programs = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITE_KEY];
+        [segue.destinationViewController setPrograms:programs];
+        [segue.destinationViewController setDelegate:self];
+    }
+}
+
+-(void)calculatorTableViewController:(CalculatorTableViewController *)sender choseProgram:(id)program
+{
+    self.program = program;
+}
 
 #define DEFAULT_SCALE 25
 - (CGFloat)scale
@@ -62,7 +88,7 @@
 -(void)setOrigin:(CGPoint)origin
 {
     if ( (origin.x != _origin.x) || (origin.y != _origin.y) ) {
-        NSLog(@"setOrigin: new Origin= (%f, %f)",origin.x, origin.y );
+        //NSLog(@"setOrigin: new Origin= (%f, %f)",origin.x, origin.y );
         _origin = origin;
         [self.graphView setNeedsDisplay];
     }
@@ -114,7 +140,7 @@
     oy = [NSNumber numberWithFloat:self.origin.y];
     scale = [NSNumber numberWithFloat:self.scale];
     
-    NSMutableArray *myProgram = [[NSMutableArray alloc] initWithArray:self.program];
+    //NSMutableArray *myProgram = [[NSMutableArray alloc] initWithArray:self.program];
     
     NSMutableArray *Yvalues = [[NSMutableArray alloc] init];
     /* for x = min to max 
@@ -167,7 +193,7 @@ return YES;
     [super viewDidUnload];
 }
 
-#pragma Mark - splitViewBarButtonItemPresenter
+#pragma mark - splitViewBarButtonItemPresenter
 
 - (id <SplitViewBarButtonItemPresenter>) splitViewBarButtonItemPresenter
 {
@@ -181,7 +207,7 @@ return YES;
 }
 
 
-#pragma Mark - split view controller methods
+#pragma mark - split view controller methods
 
 -(BOOL)splitViewController:(UISplitViewController *)svc 
   shouldHideViewController:(UIViewController *)vc 
